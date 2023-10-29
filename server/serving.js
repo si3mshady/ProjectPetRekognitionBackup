@@ -8,6 +8,11 @@ const crypto = require('crypto');
 // Image saved to: ./image.jpeg
 // Error storing item in DynamoDB: ValidationException: One or more parameter values were invalid: Size of hashkey has exceeded the maximum size limit of2048 bytes
 
+const accessKeyId = process.env.ACCESS_KEY ? process.env.ACCESS_KEY : '';
+const secretAccessKeyId  = process.env.SECRET_ACCESS_KEY ? process.env.SECRET_ACCESS_KEY : '';
+const region  = process.env.REGION ? process.env.REGION : "us-east-1";
+
+console.log(myVariable);
 
 
 app.use(bodyParser.json())
@@ -15,9 +20,9 @@ app.use(cors());
 
 // Configure the AWS SDK with your region
 AWS.config.update({
-    accessKeyId: "",
-    secretAccessKey: "",
-    region: "us-east-1",
+    accessKeyId: accessKeyId,
+    secretAccessKey: secretAccessKeyId ,
+    region: region,
   });
 
 // Create an S3 instance
