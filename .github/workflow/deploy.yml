@@ -39,16 +39,16 @@ jobs:
       - name: Deploy to Kubernetes Cluster
         run: |
           # Use SSM to run kubectl commands on the Kubernetes cluster
-          aws ssm create-command --instance-id i-xxxxxxxxxxxx --document-name "AWS-RunShellScript" --parameters 'commands=["kubectl apply -f your-k8s-deployment.yaml"]'
-          command_id=$(aws ssm wait command-executed --instance-id i-xxxxxxxxxxxx --query "Command.CommandId" --output text)
-          aws ssm wait command-executed --instance-id i-xxxxxxxxxxxx --command-id "$command_id"
-          aws ssm cancel-command --instance-id i-xxxxxxxxxxxx --command-id "$command_id"
+          aws ssm create-command --instance-id i-08abce791aa7d7ada --document-name "AWS-RunShellScript" --parameters 'commands=["kubectl apply -f your-k8s-deployment.yaml"]'
+          command_id=$(aws ssm wait command-executed --instance-id i-08abce791aa7d7ada --query "Command.CommandId" --output text)
+          aws ssm wait command-executed --instance-id i-08abce791aa7d7ada--command-id "$command_id"
+          aws ssm cancel-command --instance-id i-08abce791aa7d7ada --command-id "$command_id"
         if: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Push to Docker Hub
         run: |
           # Push your Docker image to Docker Hub
-          docker build -t your-image:your-tag .
+          docker build -t si3mshady/doggone:latest .
           docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
-          docker push your-image:your-tag
+          docker push si3mshady/doggone:latest
         if: ${{ github.ref == 'refs/heads/dev' }}
