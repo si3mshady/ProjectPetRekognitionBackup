@@ -12,7 +12,7 @@ const accessKeyId = process.env.ACCESS_KEY ? process.env.ACCESS_KEY : '';
 const secretAccessKeyId  = process.env.SECRET_ACCESS_KEY ? process.env.SECRET_ACCESS_KEY : '';
 const region  = process.env.REGION ? process.env.REGION : "us-east-1";
 
-console.log(myVariable);
+// console.log(myVariable);
 
 
 app.use(bodyParser.json())

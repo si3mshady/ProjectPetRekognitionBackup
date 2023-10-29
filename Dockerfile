@@ -34,3 +34,4 @@ CMD ["nginx", "-g", "daemon off;"]
 
 # docker build -t si3mshady/doggone-frontend:latest .
 #  docker push si3mshady/doggone-frontend:latest
+# docker run -p 888:80  si3mshady/doggone-frontend:latest 
