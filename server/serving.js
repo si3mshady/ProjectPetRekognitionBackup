@@ -8,8 +8,8 @@ const crypto = require('crypto');
 // Image saved to: ./image.jpeg
 // Error storing item in DynamoDB: ValidationException: One or more parameter values were invalid: Size of hashkey has exceeded the maximum size limit of2048 bytes
 
-const accessKeyId = process.env.ACCESS_KEY ? process.env.ACCESS_KEY : '';
-const secretAccessKeyId  = process.env.SECRET_ACCESS_KEY ? process.env.SECRET_ACCESS_KEY : '';
+const accessKeyId = process.env.NODE_ACCESS_KEY ? process.env.NODE_ACCESS_KEY : '';
+const secretAccessKeyId  = process.env.NODE_SECRET_ACCESS_KEY ? process.env.NODE_SECRET_ACCESS_KEY : '';
 const region  = process.env.REGION ? process.env.REGION : "us-east-1";
 
 // console.log(myVariable);

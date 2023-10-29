@@ -16,15 +16,15 @@ RUN npm install
 EXPOSE 5000
 
 
-ENV NODE_ACCESS_KEY=AKIAU4AW7XCWSEPKSJWT
-ENV NODE_SECRET_ACCESS_KEY=tfMUbwADZwMRWxClvN81T1qwpCsAipVBbOC21Jhz
+ENV NODE_ACCESS_KEY=
+ENV NODE_SECRET_ACCESS_KEY=
 
 # Define the command to run your application
 CMD [ "node", "serving.js" ]
 
 # docker build -t si3mshady/doggone-backend:latest .
 
-# docker run -p 888:5000  si3mshady/doggone-backend:latest 
+# docker run -p 5000:5000  si3mshady/doggone-backend:latest 
 
 
 #  docker push si3mshady/doggone-backend:latest

@@ -27,7 +27,7 @@ COPY --from=builder /app/build /usr/share/nginx/html
 # Expose port 80 for Nginx
 EXPOSE 80
 
-ENV REACT_APP_API_URL=http://thecloudshepherd.sreuniversity.org/upload
+# ENV REACT_APP_API_URL=http://thecloudshepherd.sreuniversity.org/upload
 
 # The default command to start Nginx (it will run as a background process)
 CMD ["nginx", "-g", "daemon off;"]
