@@ -17,6 +17,11 @@ const App = () => {
   const [isUploading, setIsUploading] = useState(false);
   // Define a state variable to keep track of the last uploaded image key
 
+  const apiBaseUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/upload';
+
+// Now, you can use the apiBaseUrl variable in your component
+
+
   const captureImage = async () => {
     setCapturing(true);
     // Capture logic here
@@ -32,7 +37,7 @@ const App = () => {
   async function sendImageToServer(data) {
 
       
-    fetch('http://localhost:5000/upload', {
+    fetch(apiBaseUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
