@@ -1,0 +1,54 @@
+name: Build and Deploy Kubernetes Application
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        run: |
+          echo "[default]
+          aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" > ~/.aws/credentials
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Install kubectl
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/
+        if: ${{ github.ref == 'refs/heads/main' }}
+
+      - name: Build and Test
+        run: |
+          # Add your build and test commands here
+          echo "Building and testing..."
+        if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev' }}
+
+      - name: Deploy to Kubernetes Cluster
+        run: |
+          # Use SSM to run kubectl commands on the Kubernetes cluster
+          aws ssm create-command --instance-id i-xxxxxxxxxxxx --document-name "AWS-RunShellScript" --parameters 'commands=["kubectl apply -f your-k8s-deployment.yaml"]'
+          command_id=$(aws ssm wait command-executed --instance-id i-xxxxxxxxxxxx --query "Command.CommandId" --output text)
+          aws ssm wait command-executed --instance-id i-xxxxxxxxxxxx --command-id "$command_id"
+          aws ssm cancel-command --instance-id i-xxxxxxxxxxxx --command-id "$command_id"
+        if: ${{ github.ref == 'refs/heads/main' }}
+
+      - name: Push to Docker Hub
+        run: |
+          # Push your Docker image to Docker Hub
+          docker build -t your-image:your-tag .
+          docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+          docker push your-image:your-tag
+        if: ${{ github.ref == 'refs/heads/dev' }}
