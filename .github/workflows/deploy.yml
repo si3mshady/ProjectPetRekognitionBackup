@@ -14,6 +14,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+     - name: Set up AWS credentials
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
       - name: Install kubectl
         run: |
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -21,29 +26,31 @@ jobs:
           sudo mv kubectl /usr/local/bin/
         if: ${{ github.ref == 'refs/heads/main' }}
 
-      - name: Install AWS CLI
-        run: |
-          # Install AWS CLI
-          curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-          unzip awscliv2.zip
-          sudo ./aws/install --update
-          /usr/local/bin/aws s3 ls
-        if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev' }}
-
-      - name: Build and Test
-        run: |
-          # Add your build and test commands here
-          echo "Building and testing..."
-        if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev' }}
-
-      # - name: Deploy to Kubernetes Cluster
+      # - name: Install AWS CLI
       #   run: |
-      #     # Use SSM to run kubectl commands on the Kubernetes cluster
-      #     export AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID }}"
-      #     export AWS_SECRET_ACCESS_KEY="${{ secrets.AWS_SECRET_ACCESS_KEY }}"
-      #     aws s3 ls
-      #     # aws ssm send-command --instance-ids "i-08abce791aa7d7ada" --document-name "AWS-RunShellScript" --parameters '{"commands":["kubectl apply -f k8s.yml"]}'
-      #   if: ${{ github.ref == 'refs/heads/main' }}
+      #     # Install AWS CLI
+      #     curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      #     unzip awscliv2.zip
+      #     sudo ./aws/install --update
+      #     /usr/local/bin/aws s3 ls
+      #   if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev' }}
+
+      # - name: Build and Test
+      #   run: |
+      #     # Add your build and test commands here
+      #     echo "Building and testing..."
+      #   if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev' }}
+
+      - name: Deploy to Kubernetes Cluster
+
+
+        run: |
+          # Use SSM to run kubectl commands on the Kubernetes cluster
+          # export AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID }}"
+          # export AWS_SECRET_ACCESS_KEY="${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+          aws s3 ls
+          # aws ssm send-command --instance-ids "i-08abce791aa7d7ada" --document-name "AWS-RunShellScript" --parameters '{"commands":["kubectl apply -f k8s.yml"]}'
+        if: ${{ github.ref == 'refs/heads/main' }}
 
       # - name: Push to Docker Hub
       #   run: |
