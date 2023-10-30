@@ -26,7 +26,7 @@ jobs:
           # Install AWS CLI
           curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
           unzip awscliv2.zip
-          sudo ./aws/install --update
+          sudo ./aws/install -i /usr/local/aws-cli -b /usr/local/bin
         if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev' }}
 
       - name: Build and Test
@@ -37,10 +37,9 @@ jobs:
 
       - name: Deploy to Kubernetes Cluster
         run: |
-          # Set environment variables
-          export AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID }}"
-          export AWS_SECRET_ACCESS_KEY="${{ secrets.AWS_SECRET_ACCESS_KEY }}"
           # Use SSM to run kubectl commands on the Kubernetes cluster
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws ssm send-command \
           --instance-ids "i-08abce791aa7d7ada" \
           --document-name "AWS-RunShellScript" \
