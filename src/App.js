@@ -93,8 +93,8 @@ const App = () => {
 
       navigator.geolocation.getCurrentPosition((position) => {
         setLocation({
-          latitude: hashString(position.coords.latitude) ,
-          longitude: hashString(position.coords.longitude),
+          latitude: hashString(position.coords.latitude).splice(0,5) ,
+          longitude: hashString(position.coords.longitude).splice(0,5),
         });
       });
     } else {
