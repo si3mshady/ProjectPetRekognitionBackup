@@ -112,7 +112,7 @@ const App = () => {
      console.log( {base64Data: image});
     const data = {base64Data: image, coordinates: JSON.stringify(location)}
     
-    fetch('http://3.85.16.0:5000/upload', {
+    fetch('https://2445-2603-8080-6300-b84-f135-a88c-f93a-f678.ngrok.io/upload', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
