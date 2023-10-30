@@ -14,7 +14,7 @@ jobs:
       - name: Deploy to Kubernetes Cluster
         run: |
           aws ssm send-command \
-          --instance-ids "i-08abce791aa7d7ada" \
+          --instance-ids "i-04efd57bb229490cb" \
           --document-name "AWS-RunShellScript" \
           --parameters '{"commands":["kubectl apply -f k8s.yml"]}'
         env:
