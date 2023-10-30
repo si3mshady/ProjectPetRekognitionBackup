@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: si3mshady/doggone-frontend:latest
+        image: si3mshady/doggone-frontend:v1
         ports:
         - containerPort: 80
         env:
@@ -75,7 +75,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: si3mshady/doggone-backend:latest
+        image: si3mshady/doggone-backend:v1
         ports:
         - containerPort: 5000
         env:
@@ -98,3 +98,6 @@ apiVersion: v1
   data:
     access-key: QUtJQVU0QVc3WENXU0VQS1NKV1Q=
     secret-access-key: dGZNVWJ3QURad01SV3hDbHZOODFUMXF3cENzQWlwVkJiT0MyMUpoeg==
+
+
+
