@@ -1,0 +1,16 @@
+{
+    "schemaVersion": "2.2",
+    "description": "Run kubectl apply on Kubernetes cluster",
+    "mainSteps": [
+      {
+        "action": "aws:runShellScript",
+        "name": "runShellScript",
+        "inputs": {
+          "runCommand": [
+            "kubectl apply -f k8s.yml"
+          ]
+        }
+      }
+    ]
+  }
+  
