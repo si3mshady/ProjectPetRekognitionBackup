@@ -53,7 +53,7 @@ const App = () => {
     console.log( {base64Data: image});
     const data = {base64Data: image}
     
-    fetch('http://localhost:5000/upload', {
+    fetch('http://3.85.16.0:5000/upload', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
