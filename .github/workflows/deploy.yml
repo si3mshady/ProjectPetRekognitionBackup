@@ -1,36 +1,20 @@
-name: Build and Deploy Kubernetes Application
+name: List S3 Buckets
 
 on:
   push:
     branches:
       - main
-      - dev
 
 jobs:
-  build-and-deploy:
+  list-buckets:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Set up AWS credentials
+      - name: List S3 Buckets
+        run: |
+          aws s3 ls
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-            /usr/local/bin/aws s3 ls
-
-
-
-      # - name: Install kubectl
-      #   run: |
-      #     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-      #     chmod +x kubectl
-      #     sudo mv kubectl /usr/local/bin/
-      #   if: ${{ github.ref == 'refs/heads/main' }}
-
-      # - name: Deploy to Kubernetes Cluster
-      #   run: |
-      #     aws s3 ls
-      #   if: ${{ github.ref == 'refs/heads/main' }}
+          AWS_DEFAULT_REGION: us-east-1
