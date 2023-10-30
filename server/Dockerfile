@@ -16,8 +16,8 @@ RUN npm install
 EXPOSE 5000
 
 
-ENV NODE_ACCESS_KEY=
-ENV NODE_SECRET_ACCESS_KEY=
+# ENV NODE_ACCESS_KEY=
+# ENV NODE_SECRET_ACCESS_KEY=
 
 # Define the command to run your application
 CMD [ "node", "serving.js" ]
