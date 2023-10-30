@@ -42,7 +42,6 @@ spec:
         #   value: "http://doggone.sreuniversity.org:5000/upload"
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
