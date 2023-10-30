@@ -19,14 +19,14 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-      - name: Install kubectl
-        run: |
-          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-          chmod +x kubectl
-          sudo mv kubectl /usr/local/bin/
-        if: ${{ github.ref == 'refs/heads/main' }}
+      # - name: Install kubectl
+      #   run: |
+      #     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+      #     chmod +x kubectl
+      #     sudo mv kubectl /usr/local/bin/
+      #   if: ${{ github.ref == 'refs/heads/main' }}
 
-      - name: Deploy to Kubernetes Cluster
-        run: |
-          aws s3 ls
-        if: ${{ github.ref == 'refs/heads/main' }}
+      # - name: Deploy to Kubernetes Cluster
+      #   run: |
+      #     aws s3 ls
+      #   if: ${{ github.ref == 'refs/heads/main' }}
