@@ -74,6 +74,14 @@ const App = () => {
 
   }
 
+  function hashString(text) {
+    const encoder = new TextEncoder();
+    const encodedText = encoder.encode(text);
+    const hash = new Uint8Array(32);
+    crypto.subtle.digest("SHA-256", encodedText, hash);
+    return hash.join("");
+  }
+  
   
   const captureNew = async () => {
     setIsCapturing(true); // Set isCapturing to true while capturing
@@ -85,8 +93,8 @@ const App = () => {
 
       navigator.geolocation.getCurrentPosition((position) => {
         setLocation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
+          latitude: hashString(position.coords.latitude) ,
+          longitude: hashString(position.coords.longitude),
         });
       });
     } else {
