@@ -7,8 +7,8 @@ services:
     container_name: frontend
     ports:
       - "3000:80"
-    environment:
-      - REACT_APP_API_URL=http://thecloudshepherd.sreuniversity.org:5000/upload
+    # environment:
+    #   - REACT_APP_API_URL=http://thecloudshepherd.sreuniversity.org:5000/upload
    
     # volumes:
     #   - .:/app
@@ -19,6 +19,6 @@ services:
     container_name: backend
     ports:
       - "5000:5000"
-    environment:
-      - NODE_ACCESS_KEY=
-      - NODE_SECRET_ACCESS_KEY=
+    # environment:
+    #   - NODE_ACCESS_KEY=
+    #   - NODE_SECRET_ACCESS_KEY=

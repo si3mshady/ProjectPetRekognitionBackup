@@ -5,12 +5,14 @@ metadata:
   labels:
     app: frontend
 spec:
+  type: NodePort
   ports:
-  - name: http
-    port: 80
-    targetPort: 80
+    - port: 3000   # The port exposed by the service
+      targetPort: 3000   # The port your application is listening on
+      nodePort: 30080   # A specific port to assign (hardcoded)
   selector:
     app: frontend
+
 
 ---
 
@@ -32,12 +34,12 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: si3mshady/doggone-frontend:v1
+        image: si3mshady/doggone-frontend:V8
         ports:
-        - containerPort: 80
-        env:
-        - name: REACT_APP_API_URL
-          value: "http://doggone.sreuniversity.org:5000/upload"
+        - containerPort: 3000
+        # env:
+        # - name: REACT_APP_API_URL
+        #   value: "http://doggone.sreuniversity.org:5000/upload"
 
 ---
 
@@ -48,10 +50,11 @@ metadata:
   labels:
     app: backend
 spec:
+  type: NodePort
   ports:
-  - name: http
-    port: 5000
-    targetPort: 5000
+    - port: 5000   # The port exposed by the service
+      targetPort: 5000   # The port your application is listening on
+      nodePort: 30081   # A specific port to assign (hardcoded)
   selector:
     app: backend
 

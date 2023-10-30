@@ -17,7 +17,7 @@ const App = () => {
   const [isUploading, setIsUploading] = useState(false);
   // Define a state variable to keep track of the last uploaded image key
 
-  const apiBaseUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/upload';
+  const apiBaseUrl = process.env.REACT_APP_API_URL  || 'http://3.85.16.0:5000/upload';
 
 // Now, you can use the apiBaseUrl variable in your component
 
@@ -161,8 +161,8 @@ const App = () => {
         <Webcam
           audio={false}
           screenshotFormat="image/jpeg"
-          height={100}
-          width={100}
+          height={200}
+          width={200}
           ref={webcamRef}
         />
 

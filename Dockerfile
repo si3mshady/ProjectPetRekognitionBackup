@@ -1,5 +1,5 @@
 # Stage 1: Build the React app
-FROM node:latest as builder
+FROM node:latest 
 
 WORKDIR /app
 
@@ -13,24 +13,22 @@ COPY package-lock.json package-lock.json
 # Install dependencies
 RUN npm install
 
+# # Build the React app
+# RUN npm run build
 
+# # Stage 2: Create the production image with Nginx
+# FROM nginx:alpine
 
-# Build the React app
-RUN npm run build
-
-# Stage 2: Create the production image with Nginx
-FROM nginx:alpine
-
-# Copy the built React app from the previous stage
-COPY --from=builder /app/build /usr/share/nginx/html
+# # Copy the built React app from the previous stage
+# COPY --from=builder /app/build /usr/share/nginx/html
 
 # Expose port 80 for Nginx
-EXPOSE 80
+EXPOSE 3000
 
-ENV REACT_APP_API_URL=http://thecloudshepherd.sreuniversity.org/upload
-
+# ENV REACT_APP_API_URL=http://thecloudshepherd.sreuniversity.org/upload
 # The default command to start Nginx (it will run as a background process)
-CMD ["nginx", "-g", "daemon off;"]
+# CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "start"]
 
 # docker build -t si3mshady/doggone-frontend:latest .
 #  docker push si3mshady/doggone-frontend:latest
