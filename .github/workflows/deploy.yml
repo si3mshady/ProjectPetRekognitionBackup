@@ -40,14 +40,14 @@ jobs:
           # Use SSM to run kubectl commands on the Kubernetes cluster
           export AWS_ACCESS_KEY_ID="${{ secrets.AWS_ACCESS_KEY_ID }}"
           export AWS_SECRET_ACCESS_KEY="${{ secrets.AWS_SECRET_ACCESS_KEY }}"
-          aws ssm send-command --instance-ids "i-08abce791aa7d7ada" --document-name "AWS-RunShellScript" --parameters '{"commands":["kubectl apply -f k8s.yml"]}'
-
+          echo "done"
+          # aws ssm send-command --instance-ids "i-08abce791aa7d7ada" --document-name "AWS-RunShellScript" --parameters '{"commands":["kubectl apply -f k8s.yml"]}'
         if: ${{ github.ref == 'refs/heads/main' }}
 
-      - name: Push to Docker Hub
-        run: |
-          # Push your Docker image to Docker Hub
-          docker build -t si3mshady/doggone:latest .
-          docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
-          docker push si3mshady/doggone:latest
-        if: ${{ github.ref == 'refs/heads/dev' }}
+      # - name: Push to Docker Hub
+      #   run: |
+      #     # Push your Docker image to Docker Hub
+      #     docker build -t si3mshady/doggone:latest .
+      #     docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+      #     docker push si3mshady/doggone:latest
+      #   if: ${{ github.ref == 'refs/heads/dev' }}
