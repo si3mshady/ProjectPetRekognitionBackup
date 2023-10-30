@@ -37,7 +37,7 @@ spec:
         - containerPort: 80
         env:
         - name: REACT_APP_API_URL
-          value: "http://thecloudshepherd.sreuniversity.org:5000/upload"
+          value: "http://doggone.sreuniversity.org:5000/upload"
 
 ---
 
@@ -89,16 +89,14 @@ spec:
             secretKeyRef:
               name: backend-secrets
               key: secret-access-key
----        
+
+---
+
 apiVersion: v1
-  kind: Secret
-  metadata:
-    name: backend-secrets
-  type: Opaque
-  data:
-    access-key: QUtJQVU0QVc3WENXU0VQS1NKV1Q=
-    secret-access-key: dGZNVWJ3QURad01SV3hDbHZOODFUMXF3cENzQWlwVkJiT0MyMUpoeg==
-
-
-
-
+kind: Secret
+metadata:
+  name: backend-secrets
+type: Opaque
+data:
+  access-key: QUtJQVU0QVc3WENXU0VQS1NKV1Q=
+  secret-access-key: dGZNVWJ3QURad01SV3hDbHZOODFUMXF3cENzQWlwVkJiT0MyMUpoeg==
