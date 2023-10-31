@@ -14,9 +14,14 @@ const region  = process.env.REGION ? process.env.REGION : "us-east-1";
 
 // console.log(myVariable);
 
+const corsOptions = {
+  origin: 'https://main.d3jl7uo2qze71x.amplifyapp.com', // Replace with your Amplify app's domain
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  allowedHeaders: 'Content-Type,Authorization',
+};
 
 app.use(bodyParser.json())
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Configure the AWS SDK with your region
 AWS.config.update({

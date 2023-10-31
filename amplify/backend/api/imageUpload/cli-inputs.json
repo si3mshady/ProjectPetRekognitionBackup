@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/uploader": {
+      "name": "/uploader",
+      "lambdaFunction": "doggoneuploader",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

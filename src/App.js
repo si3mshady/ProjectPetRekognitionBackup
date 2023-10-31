@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Webcam from "react-webcam";
 import "./App.css";
-import AWS from "aws-sdk";
+
+import { Amplify, API} from 'aws-amplify';
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import awsconfig from './aws-exports';
+
+Amplify.configure(awsconfig);
 
 
 
@@ -15,11 +20,47 @@ const App = () => {
   const [uploading, setUploading] = useState(false);
   const [isCapturing, setIsCapturing] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
+  const [resp, setResp] = React.useState("")
+
+  useEffect(() =>
+  
+  {
+    const apiName = 'imageUpload';
+    const path = '/uploader';
+    API.post(apiName, path).then((res) => console.log(res))
+
+
+  },[])
   // Define a state variable to keep track of the last uploaded image key
 
   const apiBaseUrl = process.env.REACT_APP_API_URL  || 'http://3.85.16.0:5000/upload';
 
 // Now, you can use the apiBaseUrl variable in your component
+
+
+async function getData() {
+  const apiName = 'imageUpload';
+  const path = '/uploader';
+  const myInit = {
+    headers: {} // OPTIONAL
+  };
+
+  return API.get(apiName, path, myInit);
+}
+
+
+// try {
+
+//   (async function() {
+//     const response = await getData();
+//     console.log(response)
+//   })();
+  
+// } catch (error) {
+
+//   console.log(error)
+  
+// }
 
 
   const captureImage = async () => {
@@ -232,4 +273,4 @@ const App = () => {
     </div>
   );
 };
-export default App;
+export default withAuthenticator(App);

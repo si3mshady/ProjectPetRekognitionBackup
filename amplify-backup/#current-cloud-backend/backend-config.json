@@ -1,0 +1,107 @@
+{
+  "api": {
+    "doggone": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "dogoneapi"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "getRecords"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "auth": {
+    "doggone": {
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "serviceType": "managed"
+    }
+  },
+  "function": {
+    "dogoneapi": {
+      "build": true,
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getRecords": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_dogoneapi_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "dogoneapi"
+        }
+      ]
+    },
+    "AMPLIFY_function_dogoneapi_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "dogoneapi"
+        }
+      ]
+    },
+    "AMPLIFY_function_dogoneapi_url": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "dogoneapi"
+        }
+      ]
+    },
+    "AMPLIFY_function_getRecords_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getRecords"
+        }
+      ]
+    },
+    "AMPLIFY_function_getRecords_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getRecords"
+        }
+      ]
+    }
+  }
+}

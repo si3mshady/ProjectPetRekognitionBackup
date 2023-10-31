@@ -1,0 +1,35 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-doggone-dev-214211-authRole",
+      "UnauthRoleArn": "arn:aws:iam::335055665325:role/amplify-doggone-dev-214211-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::335055665325:role/amplify-doggone-dev-214211-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-doggone-dev-214211-deployment",
+      "UnauthRoleName": "amplify-doggone-dev-214211-unauthRole",
+      "StackName": "amplify-doggone-dev-214211",
+      "StackId": "arn:aws:cloudformation:us-east-1:335055665325:stack/amplify-doggone-dev-214211/1863e130-7797-11ee-8530-122727a72ee5",
+      "AmplifyAppId": "d37zvrluozyow6",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-doggone-dev-214211-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
+    },
+    "categories": {
+      "function": {
+        "dogoneapi": {
+          "url": "URL2",
+          "deploymentBucketName": "amplify-doggone-dev-214211-deployment",
+          "s3Key": "amplify-builds/dogoneapi-4d4d4e435a455857784a-build.zip"
+        },
+        "getRecords": {
+          "deploymentBucketName": "amplify-doggone-dev-214211-deployment",
+          "s3Key": "amplify-builds/getRecords-696543714b31425a4d70-build.zip"
+        }
+      },
+      "auth": {
+        "doggone": {}
+      },
+      "api": {
+        "doggone": {}
+      }
+    }
+  }
+}

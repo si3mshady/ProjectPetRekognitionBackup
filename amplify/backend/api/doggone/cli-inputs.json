@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "paths": {
+    "/upload": {
+      "name": "/upload",
+      "lambdaFunction": "dogoneapi",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/getRecords": {
+      "name": "/getRecords",
+      "lambdaFunction": "getRecords",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "read"
+        ]
+      }
+    }
+  }
+}
