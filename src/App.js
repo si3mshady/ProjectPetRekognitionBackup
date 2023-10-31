@@ -23,7 +23,6 @@ const App = () => {
   const [resp, setResp] = React.useState("")
 
   useEffect(() =>
-  
   {
     const apiName = 'imageUpload';
     const path = '/uploader';
